@@ -1,13 +1,21 @@
-import AddPost from "./store/features/AddPost";
-import PostList from "./store/features/PostList";
+import {store} from "./app/store"
+import { Provider, useDispatch } from "react-redux";
+import PostsList from "./features/posts/PostsList";
+import AddPost from "./features/posts/AddPost";
+import { selectAllUsers } from "./features/users/userSlice";
+import { fetchUsers } from "./features/users/userSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  store.dispatch(fetchUsers())
   return (
-    <div>
-      <PostList/>
+    <Provider store={store}>
+    <main className="App">
       <AddPost/>
-    </div>
-     );
+      <PostsList/>
+    </main>
+    </Provider>
+  );
 }
 
 export default App;
